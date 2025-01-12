@@ -35,7 +35,14 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $user = Auth::user();
+        // First increment the token version
+        $user = Auth::getProvider()->retrieveByCredentials($credentials);
+        $user->token_version += 1;
+        $user->save();
+
+        // Then generate the token - this will include the new version in the payload
+        $token = auth()->attempt($credentials);
+
         return response()->json([
                 'status' => 'success',
                 'user' => $user,

@@ -21,6 +21,7 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
+        'token_version'  // Add this field to track token versions
     ];
 
     /**
@@ -59,7 +60,9 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getJWTCustomClaims()
     {
-        return [];
+        return [
+            'token_version' => $this->token_version // Include token version in JWT claims
+        ];
     }
 
 }
