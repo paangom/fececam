@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
 
 use App\Models\User;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 
 class AuthController extends Controller
@@ -22,12 +23,18 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
+            'identifiant' => 'required|string',
+            'key_partenaire' => 'required|string',
         ]);
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('identifiant', 'key_partenaire');
+        $user = User::where('identifiant', $request->identifiant)->first();
 
-        $token = Auth::attempt($credentials);
+        if (!$user || $user->key_partenaire !== $request->key_partenaire) {
+            return response()->json(['error' => 'Clé invalide'], 401);
+        }
+
+
+        $token = JWTAuth::fromUser($user);
         if (!$token) {
             return response()->json([
                 'status' => 'error',
@@ -41,7 +48,7 @@ class AuthController extends Controller
         $user->save();
 
         // Then generate the token - this will include the new version in the payload
-        $token = auth()->attempt($credentials);
+        $token = JWTAuth::fromUser($user);
 
         return response()->json([
                 'status' => 'success',

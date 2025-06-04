@@ -16,8 +16,11 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'partenaire_name' => 'GENESYS',
+            'identifiant' => 'genesys',
+            'telephone' => '+221774246535',
+            'email' => 'papa.ngom@genesys.sn',
+            'key_partenaire' => 'z4gN6DLsvy9NcN4hBBzd7TXeRngtqs',
         ]);
     }
 }

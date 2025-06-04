@@ -18,9 +18,11 @@ class User extends Authenticatable implements JWTSubject
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'partenaire_name',
+        'identifiant',
+        'key_partenaire',
+        'telephone',
         'email',
-        'password',
         'token_version'  // Add this field to track token versions
     ];
 
@@ -30,7 +32,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
+        'key_partenaire',
         'remember_token',
     ];
 
@@ -63,6 +65,16 @@ class User extends Authenticatable implements JWTSubject
         return [
             'token_version' => $this->token_version // Include token version in JWT claims
         ];
+    }
+
+    public function getAuthIdentifierName()
+    {
+        return 'identifiant';
+    }
+
+    public function getAuthPasswordName()
+    {
+        return 'key_partenaire';
     }
 
 }

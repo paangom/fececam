@@ -14,12 +14,15 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 
-Route::middleware([CheckTokenVersion::class])->group(function () {
+//Route::middleware([CheckTokenVersion::class])->group(function () {
     Route::controller(TodoController::class)->group(function () {
+        Route::get('customers/total', 'customerCountService');
+        Route::get('customers/infos/{codeCliente}', 'customerInfosService');
+        Route::get('cuentas/infos/{codAgencia}/{numeroCompte}', 'cuentaInfos');
         Route::get('todos', 'index');
         Route::post('todo', 'store');
         Route::get('todo/{id}', 'show');
         Route::put('todo/{id}', 'update');
         Route::delete('todo/{id}', 'destroy');
     });
-});
+//});

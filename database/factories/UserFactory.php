@@ -24,10 +24,12 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'partenaire_name' => 'GENESYS',
+            'identifiant' => 'genesys',
+            'telephone' => '+221774246535',
+            'email' => 'papa.ngom@genesys.sn',
+            'key_partenaire' => 'z4gN6DLsvy9NcN4hBBzd7TXeRngtqs',
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
     }
