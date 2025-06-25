@@ -5,7 +5,6 @@ namespace App\Models\CL;
 use App\Models\CC\CC_CUENTA_EFECTIVO;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use function Symfony\Component\Translation\t;
 
 class CL_CLIENTES extends Model
 {

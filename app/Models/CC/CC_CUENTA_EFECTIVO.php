@@ -76,4 +76,8 @@ class CC_CUENTA_EFECTIVO extends Model
         return $this->belongsTo(CL_CLIENTES::class, 'COD_CLIENTE', 'COD_CLIENTE');
     }
 
+    public function cc_autori_x_cuenta() {
+        return $this->hasMany(CC_AUTORI_X_CUENTA::class, 'NUM_CUENTA', 'NUM_CUENTA');
+    }
+
 }

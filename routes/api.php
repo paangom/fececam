@@ -16,13 +16,14 @@ Route::controller(AuthController::class)->group(function () {
 
 //Route::middleware([CheckTokenVersion::class])->group(function () {
     Route::controller(TodoController::class)->group(function () {
-        Route::get('customers/total', 'customerCountService');
-        Route::get('customers/infos/{codeCliente}', 'customerInfosService');
+        Route::get('customers/total', 'customerCount');
+        Route::get('customers/infos/{codeCliente}', 'customerInfos');
+        Route::post('customers/create', 'customerCreate');
         Route::get('cuentas/infos/{codAgencia}/{numeroCompte}', 'cuentaInfos');
-        Route::get('todos', 'index');
-        Route::post('todo', 'store');
-        Route::get('todo/{id}', 'show');
-        Route::put('todo/{id}', 'update');
-        Route::delete('todo/{id}', 'destroy');
+        Route::post('cuentas/debit', 'debitCompte');
+        Route::post('cuentas/credit', 'creditCompte');
+        Route::post('cuentas/transfer', 'makeTransfer');
+        Route::post('cuentas/funds/reserve', 'reservationDeFonds');
+        Route::post('cuentas/funds/unreserve', 'unReservationDeFonds');
     });
 //});
